@@ -1,0 +1,69 @@
+<!-- for logout -->
+<nav class="navbar  navbar-expand-sm" role="navigation">
+        <div style="padding-left:10px ;" class="navbar-brand">CAHT BOOK</div>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+           <span class="fa fa-bars"></span>
+         </button>
+       <div class="collapse navbar-collapse" id="navbarMenu">  
+       <ul class="navbar-nav  ml-auto">
+        <button type="button" class="btn button" (click)="logout()">logout</button>
+       </ul>
+       </div>
+    </nav>
+<div>
+  <div class="container-fluid">
+    <h1>NEW MESSAGE</h1>
+  <br>
+  <!-- to get data of typing members -->
+  <p *ngFor="let type of typing1">{{type.name}}&nbsp;&nbsp;&nbsp;is typing</p>
+  <div class="row">
+  <div class="col-sm-3">
+  </div>
+  <div class="col-sm-6">
+    <textarea (keyup)="typing()" placeholder="enter some text" id="message" [(ngModel)]="messages1">
+      <input type="file"  (change)="selectimage($event)">
+    </textarea>
+  <br>
+  <button type="submit"  (click)="newmessage()">send</button>
+  </div>
+  <div class="col-sm-3">
+  </div>
+</div>
+</div>
+  <br>
+  <!-- to dispaly new user -->
+  <div *ngFor="let f of newuser">
+    {{f.name}}&nbsp;&nbsp; joined room
+  </div>
+  <div *ngFor="let f1 of leftuser">
+    {{f1.name}}&nbsp;&nbsp; {{f1.message}}
+  </div>
+
+  <div *ngFor="let a of messages; let j=index">
+    
+    <div *ngIf="a.image===null;else image">
+      </div>
+  <!-- add the else block -->
+       <ng-template #image>
+        <img  src="http://localhost:3000/imageget?name={{a.image}}" style="height: 300;width: 100;" alt="image not found">
+        </ng-template>
+    <br><strong>{{a.name}}</strong><br>{{a.message}}<br>
+        <button type="submit" (click)="showcomments(j)">show Comments</button>
+      <div *ngIf="j===forcomments">
+        <p><strong>COMMENTS</strong></p><br>
+        <p *ngFor="let d of a.comment"><strong>name:&nbsp;&nbsp;</strong>{{d.name}}&nbsp;<br><strong>comment:&nbsp;&nbsp;</strong>{{d.comment}}
+    </div>
+      <br>
+      <br>
+      <strong>{{a.likes}} &nbsp; liked the post</strong><br>
+    <button type="submit" (click)="like(a.name,a.message)">like</button>
+    <br>
+  <input type="text" placeholder="comment" #comment>
+  <br>
+  <button type="submit" (click)="commentaction(a.name,a.message,comment.value)">comment</button>
+  </div>
+  </div>
+
+  <br>
+  <br><br><br><br>
+  

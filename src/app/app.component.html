@@ -1,0 +1,148 @@
+ <!-- to display register or login -->
+<!-- <div *ngIf="checkstring==='first'">
+ <button type="button" class="btn button" (click)="loginorregister('login')">Login</button><br>
+<button type="button" class="btn button" (click)="loginorregister('register')">Register</button>
+</div> -->
+ <!--register form  -->
+ <!-- <form *ngIf="checkstring==='register'" (ngSubmit)="onsubmit(user.value,mail.value,password.value)" >
+  <input type="text" placeholder="username" #user><br>
+  <input type="mail" placeholder="enter your mailid" #mail><br>
+  <input type="password" placeholder="enter password" #password><br>
+<button type="submit">submit</button>
+</form>
+<div *ngIf="registerstring==='useralreadyexists'">
+<h6 >user already exists</h6><br>
+<button type="button" class="btn button"><a routerLink="/login1" routerLinkActive="active" >Login</a></button>
+</div>
+<form *ngIf="registerstring==='confirm'" (ngSubmit)="otpsubmit(otp.value)">
+  <input type="number" placeholder="enter otp" #otp>
+  <button type="submit"> submit</button>
+</form> -->
+<!-- for login stuff -->
+<!-- <form *ngIf="checkstring==='login'" (ngSubmit)="loginsubmit(loginmail.value,loginpasword.value)">
+  <input type="mail" placeholder="enter your mail" #loginmail><br>
+  <input type="pasword" placeholder="enter your password" #loginpasword ><br>
+  <p *ngIf="loginstring==='passwordwrong'">password incorrect</p><br>
+  <button type="submit">submit</button>
+</form>
+<p *ngIf="nouser==='not exists'">account not exists</p>
+<button type="button" *ngIf="nouser==='not exists'" class="btn button" (click)="loginorregister('register')">Register</button> -->
+
+
+
+
+
+ 
+ 
+ <!-- <div  [hidden]="beforejoin">
+  <p>ENTER YOUR NAME:</p><br>
+<input type="text" [(ngModel)]="name">
+<button type="submit" (click)="join()">join</button>
+</div> -->
+<!-- <div *ngIf="checkstring==='display chats'">
+  <h1>MESSAGE</h1>
+<br>  -->
+<!-- to get data of typing members -->
+<!-- <p *ngFor="let type of typing1">{{type.name}}&nbsp;&nbsp;&nbsp;{{type.message}}</p>
+<input type="text" (keyup)="typing()" id="message" [(ngModel)]="messages1"/>
+<input type="file"  (change)="selectimage($event)">
+<br>
+<button type="submit"  (click)="newmessage()">send</button>
+<br> -->
+ <!-- to dispaly new user  -->
+<!-- <div *ngFor="let f of newuser">
+  {{f.name}}&nbsp;&nbsp; joined room
+</div>
+<div *ngFor="let a of messages; let j=index">
+  <div *ngIf="a.image===null;else image">
+    </div>  -->
+<!-- add the else block -->
+     <!-- <ng-template #image>
+      <img  src="http://localhost:3000/imageget?name={{a.image}}" style="height: 300;width: 100;" alt="image not found">
+      </ng-template>
+  <br><strong>{{a.name}}</strong><br>{{a.message}}<br>
+      <button type="submit" (click)="showcomments(j)">show Comments</button>
+    <div *ngIf="j===forcomments">
+      <p><strong>COMMENTS</strong></p><br>
+      <p *ngFor="let d of a.comment"><strong>name:&nbsp;&nbsp;</strong>{{d.name}}&nbsp;<br><strong>comment:&nbsp;&nbsp;</strong>{{d.comment}}
+  </div>
+    <br>
+    <br>
+    <strong>{{a.likes}} &nbsp; liked the post</strong><br>
+  <button type="submit" (click)="like(a.name,a.message)">like</button>
+  <br>
+<input type="text" placeholder="comment" #comment>
+<br>
+<button type="submit" (click)="commentaction(a.name,a.message,comment.value)">comment</button>
+</div>
+</div>
+<br>
+<br><br><br><br> -->
+<router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- extra stuff -->
+<!-- <div *ngFor="let a of messages2; let i=index">
+  <br><strong>{{a.name}}</strong><br>{{a.message}}
+    <br>
+    <div *ngIf="a.image===null;else image">
+    </div> -->
+<!-- add the else block -->
+     <!-- <ng-template #image>
+      <img  src="http://localhost:3000/imageget?name={{a.image}}" alt="dsxcz">{{a.image}} check
+      </ng-template>
+ <br>
+    <button type="submit" (click)="showcomments(i)">show Comments</button>
+    
+    <div *ngIf="i===forcomments">
+      <p><strong>COMMENTS</strong></p>
+      <p *ngFor="let d of a.comment"><strong>name:&nbsp;&nbsp;</strong>{{d.name}}&nbsp;<strong><br>comment:&nbsp;&nbsp;</strong>{{d.name}}{{d.comment}}
+      </p>
+    </div>
+    <br>
+    <strong>{{a.likes}} &nbsp; liked the post</strong><br>
+  <button type="submit" (click)="like(a.name,a.message)">like</button>
+  <br>
+  <input type="text" placeholder="comment" #comment>
+  <br>
+  <button type="submit" (click)="commentaction(a.name,a.message,comment.value)">comment</button>
+</div> -->
+<!-- <div *ngFor="let a of messages3"><br>
+  <strong>{{a.name}}</strong><br>{{a.message}}<br>{{a.image}}
+    <p>ADD COMMENT</p>
+    
+     <br>
+    <strong>{{a.likes}} &nbsp; liked the post</strong><br>
+    <div *ngIf="a.image===null;else image">
+    </div>
+add the else block
+     <ng-template #image>
+      <img  src="http://localhost:3000/imageget?name={{a.image}}" alt="dsxcz">{{a.image}} check
+      </ng-template>
+ <br>
+  <button type="submit" (click)="like(a.name,a.message)">like</button>
+  <br>
+  <input type="text" placeholder="comment" #comment><br>
+  <button type="submit" (click)="commentaction(a.name,a.message,comment.value)">comment</button>
+</div> -->

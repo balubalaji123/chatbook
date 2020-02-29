@@ -1,0 +1,76 @@
+.form-container{
+    position: absolute;
+    top: 15vh;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #23415c;
+    width: 80%;
+}
+.bg{
+    background: url(../../assets/img-1.jpg) no-repeat  ;
+   width: 100%;
+   height: 100vh;
+   background-size: 300%;
+}
+.form-heading{
+    text-align: center;
+    color: #23415c;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+/* .button{
+    background: #fff;
+    border: 5px solid #23415c;
+    border-radius: 20px;
+    color: #23415c;
+    font-size: 18px;
+    font-weight: 700;
+    width: 150px;
+    text-align: center;
+}
+.button a{
+    color:#23415c;
+    text-decoration: none;
+} */
+
+.button{
+    background:#23415c;
+    border-radius: 20px;  
+    font-size: 20px;
+    font-weight: 600;
+  
+}
+.button a{
+color: #fff;
+text-decoration: none;
+}
+.form-container h1{
+font-size: 35px;
+font-weight: 600;
+color: #23415c;
+}
+label{
+    color: #23415c;
+    font-size: 15px;
+    font-weight: 500;
+}
+.navbar{
+    background: #23415c;
+    color: #fff;
+    padding: 10px 30px 10px 0;
+    font-size: 1.2rem;
+    font-family:'Segoe UI';
+}
+.navbar-brand{
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+}
+.nav-link{
+    color: #fff;
+    padding: 10px;
+    
+}
+

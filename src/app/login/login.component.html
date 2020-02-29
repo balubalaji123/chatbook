@@ -1,0 +1,86 @@
+<!-- <div>
+    <p>ENTER YOUR NAME:</p><br>
+  <input type="text" [(ngModel)]="name">
+  <button type="submit" (click)="join()">join</button>
+  </div> -->
+  <!-- <form  (ngSubmit)="loginsubmit(loginmail.value,loginpasword.value)">
+    <input type="mail" placeholder="enter your mail" #loginmail><br>
+    <input type="pasword" placeholder="enter your password" #loginpasword ><br>
+    <p *ngIf="loginstring==='passwordwrong'">password incorrect</p><br>
+    <button type="submit">submit</button>
+  </form>
+  <p *ngIf="nouser==='not exists'">account not exists</p>
+  <button type="button" *ngIf="nouser==='not exists'" class="btn button" routerLink='/register1'>Register</button> 
+   -->
+
+
+
+
+
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar  navbar-expand-sm" role="navigation">
+        <div style="padding-left:10px ;" class="navbar-brand">CAHT BOOK</div>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+           <span class="fa fa-bars"></span>
+         </button>
+       <div class="collapse navbar-collapse" id="navbarMenu">  
+       <ul class="navbar-nav  ml-auto">
+        <button type="button" class="btn button"><a routerLink="/register1" routerLinkActive="active">Register</a></button>
+       </ul>
+       </div>
+    </nav>
+    
+
+
+
+
+
+    <div class="bg">
+        <div class="container-fluid mb-5 ">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="form-container">
+                    <div class="form-heading">LOGIN FORM</div>
+                    <form #userForm="ngForm" (ngSubmit)="loginsubmit(loginmail.value,loginpasword.value)" autocomplete="off">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" placeholder="Enter Email" required #loginmail>
+                        <p *ngIf="checkmail">email must be required</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="enter password" required    #loginpasword >
+                <p *ngIf="checkpassword">password required</p>
+                        </div>
+                        <p *ngIf="loginstring==='passwordwrong'">password incorrect</p><br>
+                        <button type="submit" class="btn button btn-block"><a>LOGIN</a></button>
+                </form>           
+                <p *ngIf="nouser==='not exists'">account not exists</p>                  
+                 <a  *ngIf="nouser==='not exists'" routerLink="/register1" routerLinkActive="active">register</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>            
+         
+
+
+</body>
+</html>
+
+
+
+
+
+
+  

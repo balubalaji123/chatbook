@@ -1,0 +1,14 @@
+<!-- <div>
+    <p>ENTER YOUR NAME:</p><br>
+  <input type="text" [(ngModel)]="name">
+  <button type="submit" (click)="join()">join</button>
+  </div> -->
+ <form  (ngSubmit)="loginsubmit(loginmail.value,loginpasword.value)">
+  <input type="mail" placeholder="enter your mail" #loginmail><br>
+  <input type="pasword" placeholder="enter your password" #loginpasword ><br>
+  <p *ngIf="loginstring==='passwordwrong'">password incorrect</p><br>
+  <button type="submit">submit</button>
+</form>
+<p *ngIf="nouser==='not exists'">account not exists</p>
+<button type="button" *ngIf="nouser==='not exists'" class="btn button" routerLink='/register1'>Register</button> 
+

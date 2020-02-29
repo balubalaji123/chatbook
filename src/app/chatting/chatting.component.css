@@ -1,0 +1,41 @@
+input[type='file'] {
+    color: transparent;
+  }
+
+
+.navbar{
+    background: #23415c;
+    color: #fff;
+    padding: 10px 30px 10px 0;
+    font-size: 1.2rem;
+    font-family:'Segoe UI';
+}
+.navbar-brand{
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+}
+.nav-link{
+    color: #fff;
+    padding: 10px; 
+}
+.button{
+    background: #fff;
+    border: 5px solid #23415c;
+    border-radius: 20px;
+    color: #23415c;
+    font-size: 18px;
+    font-weight: 700;
+    width: 150px;
+    text-align: center;
+}
+.button a{
+    color:#23415c;
+    text-decoration: none;
+}
+input[type=text] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+

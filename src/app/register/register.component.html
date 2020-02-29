@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!-- for navbar -->
+<nav class="navbar  navbar-expand-sm" role="navigation">
+    <div style="padding-left:10px ;" class="navbar-brand">CAHT BOOK</div>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+       <span class="fa fa-bars"></span>
+     </button>
+   <div class="collapse navbar-collapse" id="navbarMenu">  
+   <ul class="navbar-nav  ml-auto">
+    <button type="button" class="btn button"><a routerLink="/login1" routerLinkActive="active">Login</a></button>
+   </ul>
+   </div>
+</nav>
+
+
+<!-- register form -->
+<div class="bg">
+    <div class="container-fluid mb-5 ">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="form-container">
+                <div class="form-heading">REGISTER  FORM</div>
+                <form *ngIf="checkstring==='a'" (ngSubmit)="onsubmit(user.value,mail.value,password.value)"  autocomplete="off">
+                    <div class="form-group">
+                        <label>UserName</label>
+                        <input type="text" placeholder="username" #user><br>
+                        <p *ngIf="checkusername">username is required</p>                    
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="mail" placeholder="enter your mailid" #mail><br>
+                        <p *ngIf="checkmail">usermail is required</p>                    
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="enter password" #password><br>
+                        <p *ngIf="checkpassword">userpassword is required</p>                    
+                    </div>
+                    <button type="submit" class="btn button btn-block"><a>LOGIN</a></button>
+            </form>  
+            <!--incase user exists  -->
+            <form *ngIf="checkstring==='useralreadyexists'" (ngSubmit)="onsubmit(user.value,mail.value,password.value)"  autocomplete="off">
+                <div class="form-group">
+                    <label>UserName</label>
+                    <input type="text" placeholder="username" #user><br>
+                    <p *ngIf="checkusername">username is required</p>                    
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="mail" placeholder="enter your mailid" #mail><br>
+                    <p *ngIf="checkmail">usermail is required</p>                    
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="enter password" #password><br>
+                    <p *ngIf="checkpassword">userpassword is required</p>                    
+                </div>
+                <h3 >user already exists</h3><br>
+<button type="submit" class="btn button btn-block"><a routerLink="/login1" routerLinkActive="active" >Login</a></button><br>
+                <button type="submit" class="btn button btn-block"><a>REGISTER</a></button>
+                </form>
+                <form *ngIf="checkstring==='confirm'" (ngSubmit)="otpsubmit(otp.value)">
+                    <input type="number" placeholder="enter otp" #otp>
+                    <button type="submit"> submit</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>            
+     
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- my code -->
+<!-- <form *ngIf="checkstring==='a'" (ngSubmit)="onsubmit(user.value,mail.value,password.value)" >
+    <input type="text" placeholder="username" #user><br>
+    <p *ngIf="checkusername">username is required</p>
+    <input type="mail" placeholder="enter your mailid" #mail><br>
+    <p *ngIf="checkmail">usermail is required</p>
+    <input type="password" placeholder="enter password" #password><br>
+    <p *ngIf="checkpassword">userpassword is required</p>
+<button type="submit">submit</button>
+</form>
+<div *ngIf="checkstring==='useralreadyexists'">
+    <form (ngSubmit)="onsubmit(user.value,mail.value,password.value)" >
+        <input type="text" placeholder="username" #user><br>
+        <p *ngIf="checkusername">username is required</p>
+        <input type="mail" placeholder="enter your mailid" #mail><br>
+        <p *ngIf="checkmail">usermail is required</p>
+        <input type="password" placeholder="enter password" #password><br>
+        <p *ngIf="checkpassword">userpassword is required</p>
+<button type="submit">submit</button><br>
+<h3 >user already exists</h3><br>
+<button type="button" class="btn button"><a routerLink="/login1" routerLinkActive="active" >Login</a></button>
+</form>
+</div>
+<form *ngIf="checkstring==='confirm'" (ngSubmit)="otpsubmit(otp.value)">
+    <input type="number" placeholder="enter otp" #otp>
+    <button type="submit"> submit</button>
+</form> -->
