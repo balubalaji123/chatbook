@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {RegisterService} from'../register.service';
 import { from } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-register',
@@ -9,8 +11,11 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  constructor(private register:RegisterService,public router:Router) { }
+  imageUrl: string ="/assets/default.jpg";
+  public imagecheck=false
+  public uri='http://localhost:3000/register/upload'
+  public images
+  constructor(private register:RegisterService,public router:Router,private http:HttpClient) { }
 public checkstring='a'
 // to check form fields
 public checkmail=false
@@ -69,5 +74,28 @@ public checkotp=false
 
 
   }
+  selectimage(event){
+    this.imagecheck=true
+    if(event.target.files.length>0){
+      const file=event.target.files[0]
+  this.images=file
+  var reader = new FileReader();
+    reader.onload = (event : any) => {
+      this.imageUrl = event.target.result;
+  
+    }
+    reader.readAsDataURL(file);
+    }
+  }
+  
+  onimage(){
+    if(this.imagecheck){
+    const formdata=new FormData()
+    formdata.append('file',this.images)
+    this.http.post<any>(this.uri,formdata).subscribe(
+      data=>{},
+      error=>console.log(error)
+    ) }}
+  
 
 }

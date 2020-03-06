@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client'
 import { Observable } from 'rxjs';
 import{HttpClient,HttpHeaders} from '@angular/common/http'
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
   private socket=io('http://localhost:3000');
 private url='/image'
+private imageurl='/imageurl'
   constructor(private http:HttpClient) { }
   joinroom(data){
     this.socket.emit('join',data)
@@ -117,6 +116,9 @@ leftroom(){
 // req server to leave room
 reqleaveroom(data){
   this.socket.emit('leave',data)
+}
+getimageurl(){
+  return this.http.get<any>(this.imageurl)
 }
 
 }

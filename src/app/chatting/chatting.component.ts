@@ -3,6 +3,7 @@ import { ChatService } from '../chat.service';
 import { HttpClient } from '@angular/common/http';
 import {RegisterService} from'../register.service';
 import { Router, RouterModule } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-chatting',
   templateUrl: './chatting.component.html',
@@ -20,6 +21,7 @@ export class ChattingComponent implements OnInit {
   public typing1:Array<{name:String,message:String}>=[]
 public image:File
 public name
+public userimageurl
 public leftuser:Array<{name:String,message:String}>=[]
   public messages1:string
   public comment:string
@@ -31,6 +33,7 @@ public leftuser:Array<{name:String,message:String}>=[]
     }
     else{
       // to join user in the room
+    
       this.join();
     }
   },
@@ -66,6 +69,11 @@ public leftuser:Array<{name:String,message:String}>=[]
     this.chatservice.getlike().subscribe(
       data=>{this.messages=data}
     )
+    // to get image url
+this.chatservice.getimageurl().subscribe(
+  data=>{this.userimageurl=data},
+  err=>console.log(err)
+)
   }
   ngOnInit(){}
   // function to join user in room
@@ -76,18 +84,21 @@ public leftuser:Array<{name:String,message:String}>=[]
     )
   }
   newmessage(){
+    this.forcomments=-1
     this.typing1=[]
     var inputElement = <HTMLInputElement><unknown>document.getElementById('message');
 inputElement.value = '';
     // to upload image
     if(this.imagecheck){
+      console.log('in new msg func',this.imagecheck)
       this.onimage()
     }
-    this.chatservice.newmessageuser({image:this.images,name:this.name,message:this.messages1}) 
-    this.messages1=''
+    if(this.messages1!='' || this.imagecheck){
+    this.chatservice.newmessageuser({image:this.images,name:this.name,message:this.messages1,userimage:this.userimageurl}) 
+    this.messages1=''}
   }
-  like(name,message){
-    var c={name:name,message:message}
+  like(name,message,image){
+    var c={name:name,message:message,username:this.name,image:image}
     this.chatservice.likemessage(c)
     
   }
@@ -104,8 +115,8 @@ inputElement.value = '';
   }
   commentaction(name,message,comment){
     var c={username:this.name,name:name,message:message,comment:comment}
-    this.chatservice.comment(c)
-   
+    if(comment!=''){
+    this.chatservice.comment(c)}
   }
   typing(){
     this.chatservice.type({name:this.name,message:"is typing"}) 
@@ -115,7 +126,8 @@ inputElement.value = '';
   }
   // for image
   selectimage(event){
-    this.imagecheck=!this.imagecheck
+    this.imagecheck=true
+    console.log('after event',this.imagecheck)
     if(event.target.files.length>0){
       const file=event.target.files[0]
   this.images=file
@@ -130,7 +142,7 @@ inputElement.value = '';
     const formdata=new FormData()
     formdata.append('file',this.images)
     this.http.post<any>(this.uri,formdata).subscribe(
-      data=>{if(data){this.imagecheck=false}},
+      data=>{if(data){this.imagecheck=false;console.log('res',data)}},
       error=>console.log(error)
     ) 
   }

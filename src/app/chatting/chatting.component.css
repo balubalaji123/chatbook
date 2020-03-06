@@ -1,6 +1,14 @@
 input[type='file'] {
     color: transparent;
   }
+  textarea {
+    width: 70%;
+    height: 100px;
+    line-height: 150%;
+    resize:vertical;
+    border-radius: 10px;
+}
+
 
 
 .navbar{
@@ -19,7 +27,7 @@ input[type='file'] {
     color: #fff;
     padding: 10px; 
 }
-.button{
+/* .button{
     background: #fff;
     border: 5px solid #23415c;
     border-radius: 20px;
@@ -32,10 +40,32 @@ input[type='file'] {
 .button a{
     color:#23415c;
     text-decoration: none;
-}
+} */
 input[type=text] {
     background: transparent;
     border: none;
     border-bottom: 1px solid #000;
+}
+.button{
+    background:#c6e4dd;
+    border-radius: 20px;  
+    font-size: 20px;
+    font-weight: 600;
+}
+ .button a{
+color: #fff;
+text-decoration: none;
+}
+.mycard{
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #cacfd3;
+margin-left: 17%;
+width: 70%;
+height: auto;
+}
+.exbut{
+    width: 45%;
 }
 

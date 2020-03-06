@@ -25,6 +25,7 @@ dbo.collection("customers").find(c,{username:1,userpassword:1},{$exists:true}).t
           }
          else{
       req.session.name=result[0].username
+      req.session.image=result[0].userimage
 
     res.send(JSON.stringify("display chats"))
   }}

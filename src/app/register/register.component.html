@@ -25,8 +25,12 @@
         <div class="row justify-content-center">
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="form-container">
-                <div class="form-heading">REGISTER  FORM</div>
-                <form *ngIf="checkstring==='a'" (ngSubmit)="onsubmit(user.value,mail.value,password.value)"  autocomplete="off">
+                <form *ngIf="checkstring==='a'" (ngSubmit)="onsubmit(user.value,mail.value,password.value)"  autocomplete="off" novalidate>
+                    <div class="form-heading">REGISTER  FORM</div>
+                    <div class="row justify-content-center">
+                        <img src={{imageUrl}} *ngIf=!pw class="rounded-circle"  alt="image not found">
+                     </div>
+                    <input type="file" *ngIf=!pw (change)="selectimage($event)">
                     <div class="form-group">
                         <label>UserName</label>
                         <input type="text" placeholder="username" #user><br>
@@ -42,7 +46,7 @@
                         <input type="password" placeholder="enter password" #password><br>
                         <p *ngIf="checkpassword">userpassword is required</p>                    
                     </div>
-                    <button type="submit" class="btn button btn-block"><a>LOGIN</a></button>
+                    <button type="submit" class="btn button btn-block" (click)="onimage()"><a>register</a></button>
             </form>  
             <!--incase user exists  -->
             <form *ngIf="checkstring==='useralreadyexists'" (ngSubmit)="onsubmit(user.value,mail.value,password.value)"  autocomplete="off">
@@ -66,6 +70,7 @@
                 <button type="submit" class="btn button btn-block"><a>REGISTER</a></button>
                 </form>
                 <form *ngIf="checkstring==='confirm'" (ngSubmit)="otpsubmit(otp.value)">
+                    <h3>Enter the otp sent to your mail</h3>
                     <input type="number" placeholder="enter otp" #otp>
                     <button type="submit"> submit</button>
                 </form>

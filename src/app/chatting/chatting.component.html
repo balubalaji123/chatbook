@@ -6,64 +6,107 @@
          </button>
        <div class="collapse navbar-collapse" id="navbarMenu">  
        <ul class="navbar-nav  ml-auto">
-        <button type="button" class="btn button" (click)="logout()">logout</button>
+        <button type="button" class="btn btn-danger" (click)="logout()">logout</button>
        </ul>
        </div>
     </nav>
 <div>
+<!-- for file -->
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-1">
+      <input type="file"  (change)="selectimage($event)">
+    </div>
+    <div class="col-sm-8"></div>
+  </div>
+</div>
   <div class="container-fluid">
-    <h1>NEW MESSAGE</h1>
-  <br>
   <!-- to get data of typing members -->
   <p *ngFor="let type of typing1">{{type.name}}&nbsp;&nbsp;&nbsp;is typing</p>
   <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-2">
   </div>
-  <div class="col-sm-6">
-    <textarea (keyup)="typing()" placeholder="enter some text" id="message" [(ngModel)]="messages1">
-      <input type="file"  (change)="selectimage($event)">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-8">
+    <textarea (keyup)="typing()" placeholder="write something" id="message" [(ngModel)]="messages1">
     </textarea>
-  <br>
-  <button type="submit"  (click)="newmessage()">send</button>
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-1">
   </div>
 </div>
 </div>
-  <br>
-  <!-- to dispaly new user -->
+<!-- for button -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-5">
+    </div>
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary" (click)="newmessage()">send</button>
+    </div>
+  </div>
+</div>
+<br>
+  <!-- to dispaly new user
   <div *ngFor="let f of newuser">
     {{f.name}}&nbsp;&nbsp; joined room
   </div>
-  <div *ngFor="let f1 of leftuser">
+   to display left user -->
+  <!-- <div *ngFor="let f1 of leftuser">
     {{f1.name}}&nbsp;&nbsp; {{f1.message}}
-  </div>
-
-  <div *ngFor="let a of messages; let j=index">
-    
-    <div *ngIf="a.image===null;else image">
-      </div>
+  </div>  -->
+  <!-- card -->
+  <div class="container">
+  <div class="card mycard"  *ngFor="let a of messages; let j=index">
+    <div class="card-body">
+      <!-- for userimage -->
+      <div *ngIf="a.userimage===null;else image1">
+        <span>
+                  <img class="img rounded-circle" style="width:80px;height: 80px;" src="../../assets/default.jpg" alt="no image">
+                  <strong>{{a.name}}</strong>
+                </span>
+              </div>
+<!-- add the else block  -->
+         <ng-template #image1>
+           <span>
+          <img class="img rounded-circle"  style="width:80px;height: 80px;" src="http://localhost:3000/imageget1?name={{a.userimage}}" alt="not get from server">
+          <strong>{{a.name}}</strong>
+        </span> </ng-template>
+      <br>{{a.message}}
+  <div>
+    <!-- to dispaly if image exists in post -->
+    <div *ngIf="a.image===null;else image"></div>
   <!-- add the else block -->
        <ng-template #image>
-        <img  src="http://localhost:3000/imageget?name={{a.image}}" style="height: 300;width: 100;" alt="image not found">
+        <img  src="http://localhost:3000/imageget?name={{a.image}}" style="height: 300;width:100%;" alt="image not found">
         </ng-template>
-    <br><strong>{{a.name}}</strong><br>{{a.message}}<br>
-        <button type="submit" (click)="showcomments(j)">show Comments</button>
-      <div *ngIf="j===forcomments">
-        <p><strong>COMMENTS</strong></p><br>
-        <p *ngFor="let d of a.comment"><strong>name:&nbsp;&nbsp;</strong>{{d.name}}&nbsp;<br><strong>comment:&nbsp;&nbsp;</strong>{{d.comment}}
-    </div>
-      <br>
       <br>
       <strong>{{a.likes}} &nbsp; liked the post</strong><br>
-    <button type="submit" (click)="like(a.name,a.message)">like</button>
-    <br>
-  <input type="text" placeholder="comment" #comment>
-  <br>
-  <button type="submit" (click)="commentaction(a.name,a.message,comment.value)">comment</button>
-  </div>
-  </div>
+      <!-- if already liked -->
+      <div *ngIf="a.likednames.indexOf(name)>-1;else no">
+        <span>
+        <button class="btn btn-primary exbut">like</button>
+        <button type="submit" class="btn btn-default exbut" (click)="showcomments(j)"> &nbsp; &nbsp; Comment</button><br>
+      </span>
+      </div>
+      <!-- if not liked -->
+    <ng-template #no>
+      <span>
+      <button type="submit" class="btn btn-default exbut" (click)="like(a.name,a.message,a.image)">like</button>
+      <button type="submit" class="btn btn-default exbut" (click)="showcomments(j)"> &nbsp;&nbsp; Comment</button><br>
+    </span></ng-template>
+    <div *ngIf="j===forcomments">
+      <input type="text" placeholder="comment" #comment>
+      <button type="submit"  (click)="commentaction(a.name,a.message,comment.value)"> &nbsp;&nbsp; post comment</button>    
+      <p><strong><b>COMMENTS</b></strong></p>
+      <p *ngFor="let d of a.comment">&nbsp;&nbsp;<b>{{d.name}}&nbsp;</b><br><strong>&nbsp;&nbsp;</strong>{{d.comment}}
+ </div>
+</div>
+</div>
+</div>
+</div></div>
 
-  <br>
-  <br><br><br><br>
   

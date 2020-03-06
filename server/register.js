@@ -1,5 +1,6 @@
 const express=require('express')
 const router=express.Router()
+const multer=require('multer')
 const session=require('express-session')
 var nodemailer = require('nodemailer');
 var MongoClient = require('mongodb').MongoClient;
@@ -11,7 +12,38 @@ MongoClient.connect(url, function(err, db) {
 });
 var check=Math.random()
 var usermail
+var d=null
  var username1
+//  for image
+var store=multer.diskStorage({
+  destination:function(req,file,cb){
+          cb(null,'./server/uploads1')
+      },
+      filename:function(req,file,cb){
+          function makeString() {
+              let outString = '';
+              let inOptions= 'abcdefghijklmnopqrstuvwxyz';
+            
+              for (let i = 0; i < 26; i++) {
+            
+                outString += inOptions.charAt(Math.floor(Math.random() * inOptions.length));
+            
+              }
+            
+              return outString;
+            }
+            const rand=()=>{
+              d=makeString()+".jpg"
+            }
+          rand()
+          cb(null,d)
+      }
+  });
+  var upload=multer({storage:store})
+  router.post('/upload',upload.single('file'),function(req,res){
+      d=req.file.filename
+      res.send(JSON.stringify("sucess"))
+  })
   var random=[]
 router.post('/',function(req,res){
     var c=Math.floor(100000+ Math.random() * 900000);
@@ -61,7 +93,8 @@ router.post('/otp',function(req,res){
     }
     if(check==1){
         req.session.name=username1
-        myobj={username:username1,usermail:usermail,userpassword:userpassword}
+        req.session.image=d
+        myobj={userimage:d,username:username1,usermail:usermail,userpassword:userpassword}
         dbo.collection("customers").insertOne(myobj, function(err, res) {
           
           })
@@ -70,5 +103,6 @@ router.post('/otp',function(req,res){
     else
     res.send(JSON.stringify("not ok"))
 })
+
 
 module.exports=router

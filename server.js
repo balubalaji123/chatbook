@@ -67,40 +67,40 @@ io.on('connection',(socket)=>{
       
         socket.join("room");
         socket.broadcast.to("room").emit('new user',{name:data.name,message:'joined the room'})
-        chat.find().sort({_id:1}).toArray(function(err,res){
+        chat.find().sort({_id:-1}).toArray(function(err,res){
             if(err)
             throw err
             socket.emit('output',res)
         })
     })
     socket.on('message',function(data){
-        var c={image:d,name:data.name,message:data.message,likes:0,comment:[]}
+        var c={image:d,name:data.name,message:data.message,likes:0,comment:[],likednames:[],userimage:data.userimage}
         // d=null
         dbo.collection("chat").insertOne(c, function(err, res) { 
             if(err) throw err
             d=null
         })
-        chat.find().sort({_id:1}).toArray(function(err,res){
+        chat.find().sort({_id:-1}).toArray(function(err,res){
           if(err)
           throw err
-        io.in("room").emit('output',res);
-          
+        io.in("room").emit('output',res);  
       })
-
     })
 socket.on('like',function(data){
-query={name:data.name,message:data.message}
+query={name:data.name,message:data.message,image:data.image}
     dbo.collection("chat").find(query,{likes:1}).toArray(function(err,result){
         if(err)
         console.log(err)
         else
         likess=result[0].likes
         likess=likess+1;
-    var newtutorvalues = { $set: {likes:likess} };
+        checkuser=result[0].likednames
+        checkuser.push(data.username)
+    var newtutorvalues = { $set: {likes:likess,likednames:checkuser} };
     dbo.collection("chat").updateOne(query, newtutorvalues, function(err, res) {
         if (err) throw err;
       });
-      chat.find().limit(100).sort({_id:1}).toArray(function(err,res){
+      chat.find().sort({_id:-1}).toArray(function(err,res){
         if(err)
         throw err    
         socket.emit('output1',res)
@@ -122,7 +122,7 @@ socket.on('comment',function(data){
         dbo.collection("chat").updateOne(query, newtutorvalues, function(err, res) {
             if (err) throw err;
           });
-          chat.find().limit(100).sort({_id:1}).toArray(function(err,res){
+          chat.find().sort({_id:-1}).toArray(function(err,res){
             if(err)
             throw err
             socket.emit('output2',res)
@@ -135,9 +135,6 @@ socket.on('leave', function(data){
   socket.broadcast.to('room').emit('left room', {name:data.name, message:'has left this room.'});
   socket.leave('room');
 });
-
-
-
 })});
 app.post('/image',upload.single('file'),function(req,res){
     res.send(true)
@@ -149,6 +146,16 @@ app.get('/imageget',function(req,res){
   })
   app.get('/name',function(req,res){
     res.send(JSON.stringify(req.session.name))
+  })
+  // for image url
+  app.get('/imageurl',function(req,res){
+    res.send(JSON.stringify(req.session.image))
+  })
+  // for message sender image
+  app.get('/imageget1',function(req,res){
+    name=req.query['name']
+    address=__dirname+'/server/uploads1/'+name
+    res.sendFile(address)
   })
   // wildcart routing in backend
   app.get('/*',function(req,res){
