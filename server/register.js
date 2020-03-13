@@ -64,8 +64,8 @@ router.post('/',function(req,res){
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'wolvesofthevalleysspardha@gmail.com',
-          pass: 'fmt@12345'
+          // user:mail id,
+          // pass:password
         }
       });
       var mailOptions = {
